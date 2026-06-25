@@ -63,8 +63,8 @@ A Node.js + Express backend with a static frontend for managing products in Mong
 The frontend in `front end/` includes:
 
 - `index.html` - dashboard layout with auth and product manager
-- `styles.css` - page styles
-- `app.js` - frontend logic for auth and product management
+- `style.css` - page styles
+- `script.js` - frontend logic for auth and product management
 
 ## Notes
 
