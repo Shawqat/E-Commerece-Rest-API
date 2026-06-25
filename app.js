@@ -1,9 +1,10 @@
-// 1. فتح الخزنة السرية لقراءة المتغيرات
-require('dotenv').config(); 
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 
 const express = require('express');
 const mongoose = require('mongoose');
 const productRoutes = require('./routes/productRoutes');
+const userRouter = require('./routes/userRoutes');
 
 
 const app = express();
@@ -21,10 +22,12 @@ mongoose.connect(process.env.MONGO_URI)
     });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRouter);
 
 app.get('/', (req, res) => {
     res.sendFile('index.html', { root: __dirname + '/public' });
 });
+
 
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`);

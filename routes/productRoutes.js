@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const authController = require('../controllers/authController');
 
 // router.post('/', productController.createProduct);
 
@@ -11,12 +12,12 @@ const productController = require('../controllers/productController');
 // router.delete('/:slug', productController.deleteProduct);
 
 router.route('/')
-        .post(productController.createProduct)
+        .post(authController.protect, authController.restrictTo('admin'), productController.createProduct)
         .get(productController.getAllProducts);
 
 router.route('/:slug')
         .get(productController.getProductBySlug)
-        .patch(productController.updateProduct)
-        .delete(productController.deleteProduct);
+        .patch(authController.protect, authController.restrictTo('admin'), productController.updateProduct)
+        .delete(authController.protect, authController.restrictTo('admin'), productController.deleteProduct);
 
 module.exports = router;
